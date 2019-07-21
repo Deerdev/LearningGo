@@ -15,6 +15,9 @@ import (
 // Read 用数据填充给定的字节切片并返回填充的字节数和错误值。在遇到数据流的结尾时，它会返回一个 io.EOF 错误。
 
 
+// 有种常见的模式是一个 io.Reader 包装另一个 io.Reader，然后通过某种方式修改其数据流。
+// 例如，gzip.NewReader 函数接受一个 io.Reader（已压缩的数据流）并返回一个同样实现了 io.Reader 的 *gzip.Reader（解压后的数据流）。
+
 func main() {
 	// 创建了一个 strings.Reader 并以每次 8 字节的速度读取它的输出。
 	r := strings.NewReader("Hello, Reader!")
@@ -28,7 +31,7 @@ func main() {
 			break
 		}
 	}
-	
+
 	// n = 8 err = <nil> b = [72 101 108 108 111 44 32 82]
 	// b[:n] = "Hello, R"
 	// n = 6 err = <nil> b = [101 97 100 101 114 33 32 82]
