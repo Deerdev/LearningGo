@@ -11,7 +11,7 @@ type T struct {
 }
 
 func (t *T) M() {
-	// 便接口内的具体值为 nil，方法仍然会被 nil 接收者调用
+	// 即便接口内的具体值为 nil，方法仍然会被 nil 接收者调用
 	if t == nil {
 		fmt.Println("<nil>")
 		return
