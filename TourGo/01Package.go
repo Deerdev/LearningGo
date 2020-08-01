@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"math/rand"
 	"math"
+	// 加下划线代表调用test包中的 init 方法
+	_ "github.com/test"
 )
 
 func main() {
