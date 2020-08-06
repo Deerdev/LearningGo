@@ -24,8 +24,8 @@
 package main
 
 import (
-	"fmt"
-	"sort"
+    "fmt"
+    "sort"
 )
 
 /*
@@ -35,23 +35,23 @@ import (
 
 // 1.两个数组无序
 func intersect(a1 []int, a2 []int) []int {
-	num_dict := map[int]int{}
-	// value 存字典
-	for _, v := range a1 {
-		num_dict[v] += 1
-	}
+    numDict := map[int]int{}
+    // value 存字典
+    for _, v := range a1 {
+        numDict[v] += 1
+    }
 
-	i := 0
-	for _, v := range a2 {
-		// 已存在，则大于 0，key 不存在时为零值（int 零值为 0）
-		if num_dict[v] > 0 {
-			num_dict[v] -= 1
-			// 如果元素相同，复用存入 a2(节省空间)，并将出现次数减 1
-			a2[i] = v
-			i++
-		}
-	}
-	return a2[0:i]
+    i := 0
+    for _, v := range a2 {
+        // 已存在，则大于 0，key 不存在时为零值（int 零值为 0）
+        if numDict[v] > 0 {
+            numDict[v] -= 1
+            // 如果元素相同，复用存入 a2(节省空间)，并将出现次数减 1
+            a2[i] = v
+            i++
+        }
+    }
+    return a2[0:i]
 }
 
 // 2.两个数组有序
@@ -61,29 +61,30 @@ func intersect(a1 []int, a2 []int) []int {
 <2>如果两个指针的元素不相等，我们将小的一个指针后移。 图中我们指针移到下一个元素，判断不相等之后，将元素小的指针向后移动，继续进行判断。
 <3>反复以上步骤，直到数组结尾
 */
-func intersect_sort(a1 []int, a2 []int) []int {
-	i, j, k := 0, 0, 0
-	sort.Ints(a1)
-	sort.Ints(a2)
-	for i < len(a1) && j < len(a2) {
-		if a1[i] == a2[j] {
-			a2[k] = a2[j]
-			k++
-			i++
-			j++
-		} else if a1[i] < a2[j] {
-				i++
-		} else {
-			j++
-		}
-	}
-	return a2[:k]
+func intersectSort(a1 []int, a2 []int) []int {
+    i, j, k := 0, 0, 0
+    sort.Ints(a1)
+    sort.Ints(a2)
+    for i < len(a1) && j < len(a2) {
+        if a1[i] == a2[j] {
+            // 复用 a2 存储
+            a2[k] = a2[j]
+            k++
+            i++
+            j++
+        } else if a1[i] < a2[j] {
+            i++
+        } else {
+            j++
+        }
+    }
+    return a2[:k]
 }
 
 func main() {
-	result := intersect([]int{1, 2, 2, 3}, []int{2, 3, 5, 6})
-	fmt.Println(result)
+    result := intersect([]int{1, 2, 2, 3}, []int{2, 3, 5, 6})
+    fmt.Println(result)
 
-	result = intersect_sort([]int{1, 2, 5, 3}, []int{2, 3, 5, 6})
-	fmt.Println(result)
+    result = intersectSort([]int{1, 2, 5, 3}, []int{2, 3, 5, 6})
+    fmt.Println(result)
 }
