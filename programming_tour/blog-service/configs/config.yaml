@@ -1,0 +1,48 @@
+# 文件配置，使用 viper
+Server:
+  RunMode: debug
+  HttpPort: 8000
+  ReadTimeout: 60
+  WriteTimeout: 60
+App:
+  DefaultPageSize: 10
+  MaxPageSize: 100
+  DefaultContextTimeout: 60
+  LogSavePath: storage/logs
+  LogFileName: app
+  LogFileExt: .log
+  # UploadSavePath：上传文件的最终保存目录。
+  # UploadServerUrl：上传文件后用于展示的文件服务地址。
+  # UploadImageMaxSize：上传文件所允许的最大空间大小（MB）。
+  # UploadImageAllowExts：上传文件所允许的文件后缀。
+  UploadSavePath: storage/uploads
+  UploadServerUrl: http://127.0.0.1:8000/static
+  UploadImageMaxSize: 5  # MB
+  UploadImageAllowExts:
+    - .jpg
+    - .jpeg
+    - .png
+Email:
+  Host: smtp.qq.com
+  Port: 465
+  UserName: xxx
+  Password: xxx
+  IsSSL: true
+  From: xxx
+  To:
+    - xxx
+JWT:
+  Secret: eddycjy
+  Issuer: blog-service
+  Expire: 7200
+Database:
+  DBType: mysql
+  UserName: root
+  Password: rootroot
+  Host: 127.0.0.1:3306
+  DBName: blog_service
+  TablePrefix: blog_
+  Charset: utf8
+  ParseTime: True
+  MaxIdleConns: 10
+  MaxOpenConns: 30
