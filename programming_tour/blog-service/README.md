@@ -8,11 +8,11 @@
 ├── go.mod
 ├── go.sum
 ├── internal        # 内部模块
-│   ├── dao             # 数据访问层（Database Access Object），所有与数据相关的操作都会在dao层进行，例如 MySQL、Elasticsearch等; 连接业务层和 model 层
-│   ├── middleware      # HTTP中间件: 国际化(validate 报错转中文)
-│   ├── model           # 模型层，用于存放model对象
-│   ├── routers         # 路由相关的逻辑
-│   └── service         # 项目核心业务逻辑: model参数校验
+│         ├── dao             # 数据访问层（Database Access Object），所有与数据相关的操作都会在dao层进行，例如 MySQL、Elasticsearch等; 连接业务层和 model 层
+│         ├── middleware      # HTTP中间件: 国际化(validate 报错转中文)
+│         ├── model           # 模型层，用于存放model对象
+│         ├── routers         # 路由相关的逻辑
+│         └── service         # 项目核心业务逻辑: model参数校验
 ├── main.go
 ├── storage         # 项目生成的临时文件
 ├── scripts         # 各类构建、安装、分析等操作的脚本
