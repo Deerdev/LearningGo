@@ -3,6 +3,8 @@ package main
 import "fmt"
 
 func main() {
+    /// ---- 数组 ------
+    // 需要指明数组的大小和存储的数据类型。
 	var a [2]string // 默认初始化为 ["", ""]
 	a[0] = "Hello"
 	a[1] = "World"
@@ -13,6 +15,34 @@ func main() {
 	primes := [6]int{2, 3, 5, 7, 11, 13}
 	fmt.Println(primes)
 
+	// 自动计算个数；不指定"..."是切片的初始化
+	b := [...]float32{1000.0, 2.0, 3.4, 7.0, 50.0}
+    fmt.Println(b)
+
+    // 指定某些索引的数值
+    f := [...] int{0: 1, 4: 1, 9: 1}
+    fmt.Println(f) // [1 0 0 0 1 0 0 0 0 1]
+
+    // 数组长度
+    fmt.Println(len(f))
+
+    // range 遍历
+    for i, v := range b {
+        // index and value
+        fmt.Printf("%d the element of a is %.2f\n", i, v)
+    }
+
+    // 数组是值类型，并且数组的大小是类型的一部分，长度不同数组，类型也不一样：[3]int 和 [5]int 是不同的类型
+    var al []int     // 创建slice
+    sl:=[3]int{1,2,3} //创建有初始化元素的slice
+    s2:=[4]int{1,2,3,4} //创建有初始化元素的slice
+    fmt.Printf("%T, %T, %T", al, sl, s2)    // []int, [3]int, [4]int
+
+
+
+
+
+    /// ------ 切片 ------
 	/// 切片 a[low : high]
 	var ws []int = primes[1:4]  // 提取 1-2-3， [1:4)
 	fmt.Println(ws)	// [3 5 7]
@@ -29,10 +59,10 @@ func main() {
 
 	aa := names[0:2]
 	bb := names[1:3]
-	fmt.Println(aa, bb)
+	fmt.Println(aa, bb) // [John Paul] [Paul George]
 
 	bb[0] = "XXX"
-	fmt.Println(aa, bb)
+	fmt.Println(aa, bb) // [John XXX] [XXX George]
 	fmt.Println(names)	// [John XXX George Ringo]
 
 	// 切片定义：切片定义类似于没有长度的数组定义
@@ -55,7 +85,7 @@ func main() {
 		{13, true},
 	}
 	fmt.Println(w)
-	
+
 	// 切片的默认定义: low 默认为 0, high 默认为数组长度
 	/*
 	以下等价：
