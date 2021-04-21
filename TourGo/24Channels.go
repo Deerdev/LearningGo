@@ -46,6 +46,10 @@ func fibonacci(n int, c chan int) {
 	close(c)
 }
 
+func consumer(msg chan int) {
+	fmt.Println(<-msg)
+}
+
 func main() {
 	s := []int{7, 2, 8, -9, 4, 0}
 
@@ -66,8 +70,31 @@ func main() {
 
 	c := make(chan int, 10)
 	go fibonacci(cap(c), c)
+
+	// 可以循环读取
 	for i := range c {
 		// 循环直到 C 被关闭
 		fmt.Println(i)
 	}
+
+	var msg = make(chan int) // 没有缓存的 channel 必须先启动接收者（有缓存的，超过缓存大小，也会 deadlock），再发送数据，不然会 deadlock
+	go consumer(msg)
+	msg <- 1 //当放数据到msg中的时候 这个时候会阻塞的，阻塞之前会获取一把锁，这把锁的释放 要等到数据被消费之后
+
+	/// channel 的关闭
+	// 关闭的 channel 无法发送数据，但是还可以从 channel 中获取数据
+	// ok：判断 channel 是否关闭
+	i, ok := <-c
 }
+
+/// 类型
+// 1. 无缓冲通道
+// 2. 有缓冲通道
+// 3. 单向通道
+// 4. 双向通道
+
+// 只能发不能收的通道。
+var uselessChan = make(chan<- int, 1)
+
+// 只能收不能发的通道。
+var anotherUselessChan = make(<-chan int, 1)

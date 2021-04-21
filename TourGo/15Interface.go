@@ -27,7 +27,6 @@ func (v *Vertex) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
-
 /// 接口的隐式实现
 // 某类型只要实现了接口的所有方法 即实现了该接口，而不需要显式的去 implement 接口
 // 隐式接口从接口的实现中解耦了定义，这样接口的实现可以出现在任何包中，无需提前准备
@@ -65,19 +64,18 @@ func main() {
 
 	// 下面一行，v 是一个 Vertex（而不是 *Vertex）
 	// 所以没有实现 Abser。
-	a = v	// cannot use v (type Vertex) as type Abser in assignment: Vertex does not implement Abser (Abs method has pointer receiver)
+	a = v // cannot use v (type Vertex) as type Abser in assignment: Vertex does not implement Abser (Abs method has pointer receiver)
 	fmt.Println(a.Abs())
-
 
 	// 接口值
 	var i I
 
 	i = &T{"Hello"}
-	describe(i)	// (&{Hello}, *main.T)
+	describe(i) // (&{Hello}, *main.T)
 	i.M()
 
 	i = F(math.Pi)
-	describe(i)	// (3.141592653589793, main.F)
+	describe(i) // (3.141592653589793, main.F)
 	i.M()
 }
 

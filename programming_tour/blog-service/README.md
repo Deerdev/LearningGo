@@ -33,5 +33,5 @@
 ```
 
 ```
-model 的调用：api->handle->service->dao->model
+model 的调用：router(api->handle) -> service -> dao -> model
 ```

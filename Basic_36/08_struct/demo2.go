@@ -2,6 +2,12 @@ package main
 
 import "fmt"
 
+/*
+- 接口实现
+- 指针类型和对象类型
+- struct{}
+ */
+
 type Cat struct {
     name           string // 名字。
     scientificName string // 学名。

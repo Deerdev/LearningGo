@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"math/cmplx"
 	"math"
+	"math/cmplx"
 )
+
 /*
 Go 的基本类型有
 
@@ -24,7 +25,7 @@ float32 float64
 
 complex64 complex128
 
-*** int, uint 和 uintptr 在 32 位系统上通常为 32 位宽，在 64 位系统上则为 64 位宽。 
+*** int, uint 和 uintptr 在 32 位系统上通常为 32 位宽，在 64 位系统上则为 64 位宽。
 *** 当你需要一个整数值时应使用 int 类型，除非你有特殊的理由使用固定大小或无符号的整数类型。
 */
 
@@ -37,7 +38,6 @@ complex64 complex128
 布尔类型为 false，
 字符串为 ""（空字符串）。
 */
-
 
 // 可以使用组合的形式定义变量
 var (
@@ -61,6 +61,27 @@ func needFloat(x float64) float64 {
 	return x * 0.1
 }
 
+/// iota
+// iota 只能在常量组中使用，常量组内每次执行后 iota 自动+1（没行）；不同的常量组互不干扰
+// x=0, y=1, z=2
+const (
+	x = iota // iota = 0
+	y
+	z
+)
+
+// 没有表达式的常量定义复用上一行的表达式(b,d 使用上一行的值)
+// 从第一行开始，iota 从 0 「逐行」加
+const (
+	w    = iota       // iota = 0
+	a    = 10         // iota = 1
+	b                 // b=10, iota =2
+	c    = "123"      // iota = 3
+	d                 // d = "123", iota = 4
+	e, f = iota, iota // e,f = 4,4
+	g    = iota       // g = 5
+)
+
 func main() {
 	fmt.Printf("Type: %T Value: %v\n", ToBe, ToBe)
 	fmt.Printf("Type: %T Value: %v\n", MaxInt, MaxInt)
@@ -70,14 +91,14 @@ func main() {
 	var f float64
 	var b bool
 	var s string
-	fmt.Printf("%v %v %v %q\n", i, f, b, s)		// 0 0 false ""
+	fmt.Printf("%v %v %v %q\n", i, f, b, s) // 0 0 false ""
 
 	/// 类型转换
 	// 表达式 T(v) 将值 v 转换为类型 T
 	var x, y int = 3, 4
 	var t float64 = math.Sqrt(float64(x*x + y*y))
 	var w uint = uint(t)
-	k := float32(3)	// 简单写法
+	k := float32(3) // 简单写法
 	fmt.Println(x, y, t, w, k)
 
 	/// 常量
@@ -85,7 +106,7 @@ func main() {
 	// 不可以使用 := 语法
 	const Truth = true
 
-	fmt.Println(needInt(Small))	// small 是 int
-	fmt.Println(needFloat(Small))	// small 是 float64
-	fmt.Println(needFloat(Big))	// big 是 float64
+	fmt.Println(needInt(Small))   // small 是 int
+	fmt.Println(needFloat(Small)) // small 是 float64
+	fmt.Println(needFloat(Big))   // big 是 float64
 }
